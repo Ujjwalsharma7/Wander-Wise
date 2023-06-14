@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const Wanderground = require('./models/wanderGround');
+
+
 mongoose.connect('mongodb://127.0.0.1:27017/wander-wise', {
     useNewUrlParser: true,
     // useCreateIndex: true,
@@ -19,6 +22,11 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.get("/", (req, res) => {
     res.render('home')
+})
+app.get("/makeWanderground", async(req, res) => {
+    const Wander = new Wanderground({title: 'My Backyard', description: 'cheap wandering!'});
+    await camp.save();
+    res.send(Wander)
 })
 
 app.listen(3000, ()  =>{
