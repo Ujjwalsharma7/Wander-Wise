@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Wanderground = require('../models/wanderGround');
+const cities = require('./cities')
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/wander-wise', {
@@ -14,9 +15,13 @@ db.once("open", () => {
     console.log("database connected");
 })
 
-const seedDB = async () => {{
+const seedDB = async () => {
     await Wanderground.deleteMany({});
-    const w = new Wanderground({title: 'purple field'});
-    await w.save();
+   for(let i =0; i<50 ; i++){
+    const random1000 = Math.floor(Math.random() *1000);
+    const wander = new Wanderground ({
+        location: `${cities[random1000].city}, ${cities[random1000].state}`
+    })
+   await wander.save();
 }}
 seedDB();
