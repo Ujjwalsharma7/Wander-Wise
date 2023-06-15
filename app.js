@@ -23,9 +23,9 @@ app.set('views', path.join(__dirname, 'views'))
 app.get("/", (req, res) => {
     res.render('home')
 })
-app.get("/makeWanderground", async(req, res) => {
+app.get("/makewanderground", async(req, res) => {
     const Wander = new Wanderground({title: 'My Backyard', description: 'cheap wandering!'});
-    await camp.save();
+    await Wander.save();
     res.send(Wander)
 })
 
